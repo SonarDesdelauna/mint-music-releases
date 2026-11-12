@@ -42,6 +42,10 @@
       case 'play': player.playVideo(); break;
       case 'pause': player.pauseVideo(); break;
       case 'seek': player.seekTo(Number(args[0]) || 0, true); break;
+      case 'meta':
+        var m = args[0] || {};
+        if (navigator.mediaSession && window.MediaMetadata) navigator.mediaSession.metadata = new MediaMetadata({ title: m.title || '', artist: m.artist || '', album: m.album || '', artwork: m.artwork ? [{ src: m.artwork, sizes: '600x600' }] : [] });
+        break;
       case 'volume': player.setVolume(Math.max(0, Math.min(100, Number(args[0]) || 0))); break;
     }
     snapshot('state');
